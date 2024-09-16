@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import PropertyListItem from "./PropertyListItem";
 
+export type PropertyType = {
+  id: string;
+}
+
 export const PropertyList = () => {
+  const [properties, setProperties] = useState<PropertyType[]>([]);
+  
   const getProperties = async () => {
     const url = 'http://localhost:8000/api/properties/';
 
@@ -13,6 +19,8 @@ export const PropertyList = () => {
         .then(response => response.json())
         .then((json) => {
           console.log('json', json);
+
+          setProperties(json.data)
         })
         .catch((error) => {
           console.log('error', error);
@@ -25,9 +33,14 @@ export const PropertyList = () => {
 
   return (
     <>
-        <PropertyListItem />
-        <PropertyListItem />
-        <PropertyListItem />
+        {properties.map((property) =>{
+          return(
+            <PropertyListItem
+              key = {property.id}
+              property={property}
+            />
+          )
+        })}
     </> 
   )
 }
