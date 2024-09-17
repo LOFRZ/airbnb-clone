@@ -1,13 +1,25 @@
 'use client'
 
 import useAddPropertyModal from "@/app/hooks/useAddPropertyModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import AddPropertyModal from "../modals/AddPropertyModal";
 
-const AddPropertyButton = () => {
+interface AddPropertyButtonProps {
+    userId?: string | null;
+}
+
+const AddPropertyButton: React.FC<AddPropertyButtonProps> = ({
+    userId
+}) => {
+    const LoginModal = useLoginModal ();
     const addPropertyModal = useAddPropertyModal();
 
     const airbnbYourHome = () => {
-        addPropertyModal.open()
+        if (userId){ 
+            addPropertyModal.open()
+        } else {
+            LoginModal.open();
+        }
     }
 
     return (
