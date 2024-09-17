@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import useSignupModal from "@/app/hooks/useSignupModal";
 import CustomButton from "../form/CustomButton";
 import apiService from "@/app/services/apiSevice";
+import { handleLogin } from "@/app/lib/action";
 
 const SignupModal = () => {
     //
@@ -23,15 +24,16 @@ const SignupModal = () => {
 
     const submitSignup = async () => {
         const formData = {
+            name: 'code',
             email: email,
             password1: password1,
             password2: password2,
         }
 
-        const response = await apiService.post('/api/auth/register/', formData);
+        const response = await apiService.post('/api/auth/register/', JSON.stringify(formData));
 
         if (response.access) {
-            // handlogin
+            handleLogin(response.user.pk, response.access, response.refresh);
 
             signupModal.close();
 
