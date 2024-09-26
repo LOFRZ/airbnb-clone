@@ -86,6 +86,21 @@ const AddPropertyModal = () => {
                         onClick={() => setCurrentStep(3)}
                     />
                 </>
+            ) : currentStep == 3 ? (
+                <>
+                    <h2 className="mb-6 text-2xl">Details</h2>
+
+                    <CustomButton
+                        label="Previous"
+                        className="mb-2 bg-black hover:bg-gray-800"
+                        onClick={() => setCurrentStep(2)}
+                    />
+
+                    <CustomButton
+                        label="Next"
+                        onClick={() => setCurrentStep(4)}
+                    />
+                </>
             ) : (
                 <p>szghh</p>
             )}
