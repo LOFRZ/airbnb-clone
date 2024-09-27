@@ -9,6 +9,7 @@ import LoginModal from "./LoginModal";
 import useAddPropertyModal from "@/app/hooks/useAddPropertyModal";
 import Categories from "../addproperty/Categories";
 import CustomButton from "../form/CustomButton";
+import SelectCountry, { SelectCountryValue } from "../form/SelectCountry";
 
 const AddPropertyModal = () => {
     //
@@ -22,6 +23,7 @@ const AddPropertyModal = () => {
     const [dataBedrooms, setDataBedrooms] = useState('');
     const [dataBathrooms, setDataBathrooms] = useState('');
     const [dataGuests, setDataGuests] = useState('');
+    const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
 
     //
     //
@@ -149,10 +151,13 @@ const AddPropertyModal = () => {
                 </>
             ) : currentStep == 4 ? (
                 <>
-                    <h2 className="mb-6 text-2xl">Details</h2>
+                    <h2 className="mb-6 text-2xl">Location</h2>
 
                     <div className='pt-3 pb-6 space-y-4'>
-                        setgeg
+                        <SelectCountry 
+                            value={dataCountry}
+                            onChange={(value) => setDataCountry(value as SelectCountryValue)}
+                        />
                     </div>
 
                     <CustomButton
