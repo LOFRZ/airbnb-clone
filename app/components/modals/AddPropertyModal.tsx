@@ -10,6 +10,9 @@ import useAddPropertyModal from "@/app/hooks/useAddPropertyModal";
 import Categories from "../addproperty/Categories";
 import CustomButton from "../form/CustomButton";
 import SelectCountry, { SelectCountryValue } from "../form/SelectCountry";
+import { useRouter } from 'next/navigation';
+
+import apiService from "@/app/services/apiSevice";
 
 const AddPropertyModal = () => {
     //
@@ -43,6 +46,48 @@ const AddPropertyModal = () => {
             const tmpImage = event.target.files[0];
 
             setDataImage(tmpImage);
+        }
+    }
+
+    //
+    // submit
+
+    const submitForm = async () => {
+        console.log('sub');
+
+        if (
+            dataCategory &&
+            dataTitle &&
+            dataDescription &&
+            dataImage &&
+            dataCountry &&
+            dataImage 
+        ) {
+            const formData = new FormData();
+            formData.append('category', dataCategory);
+            formData.append('title', dataTitle);
+            formData.append('description', dataDescription);
+            formData.append('price_per_night', dataPrice);
+            formData.append('bedrooms', dataBedrooms);
+            formData.append('bathrooms', dataBathrooms);
+            formData.append('guests', dataGuests);
+            formData.append('country', dataCountry.label);
+            formData.append('country_code', dataCountry.value);
+            formData.append('image', dataImage);
+
+            const response = await apiService.post('/api/properties/create/', formData);
+
+            if (response.success) {
+                console.log('SUCCESS :-D');
+
+                router.push('/?added=true');
+
+                addPropertyModal.close();
+            } else {
+                console.log('Error');
+
+        
+            }
         }
     }
 
@@ -218,7 +263,7 @@ const AddPropertyModal = () => {
 
                     <CustomButton
                         label="Submit"
-                        onClick={() => console.log('Submit')}
+                        onClick={submitForm}
                     />
 
                 </>
