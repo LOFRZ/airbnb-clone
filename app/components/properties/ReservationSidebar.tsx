@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Range } from 'react-date-range';
 import { differenceInDays, eachDayOfInterval, format} from 'date-fns';
-
+import DatePicker from "../form/Calendar";
 
 
 import apiService from "@/app/services/apiSevice";
@@ -42,6 +42,22 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
   const [guests, setGuests] = useState<string>('1');
   const guestsRange = Array.from({ length: property.guests }, (_, index) => index + 1)
 
+  const _setDateRange = (selection: any) => {
+    const newStartDate = new Date(selection.startDate);
+    const newEndDate = new Date(selection.endDate);
+
+    if (newEndDate <= newStartDate) {
+        newEndDate.setDate(newStartDate.getDate() + 1);
+    }
+
+    setDateRange({
+        ...dateRange,
+        startDate: newStartDate,
+        endDate: newEndDate
+    })
+}
+
+
   useEffect (() => {
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInDays(
@@ -69,6 +85,11 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
   return (
     <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl">
         <h2 className="mb-5 text-2xl">${property.price_per_night} per night</h2>
+
+        <DatePicker
+          value={dateRange}
+          onChange={(value) => _setDateRange(value.selection)}
+        />
 
         <div className="mb-6 p-3 border border-gray-400 rounded-xl">
           <label className="mb-2 block font-bold text-xs">Guests</label>
