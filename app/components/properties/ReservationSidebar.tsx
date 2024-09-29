@@ -82,6 +82,22 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
     })
 }
 
+const getReservations = async () => {
+  const reservations = await apiService.get(`/api/properties/${property.id}/reservations/`)
+
+  let dates: Date[] = [];
+
+  reservations.forEach((reservation: any) => {
+      const range = eachDayOfInterval({
+          start: new Date(reservation.start_date),
+          end: new Date(reservation.end_date)
+      });
+
+      dates = [...dates, ...range];
+  })
+
+  setBookedDates(dates);
+}
 
   useEffect (() => {
     if (dateRange.startDate && dateRange.endDate) {
