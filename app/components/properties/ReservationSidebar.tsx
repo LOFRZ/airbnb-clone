@@ -42,6 +42,31 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
   const [guests, setGuests] = useState<string>('1');
   const guestsRange = Array.from({ length: property.guests }, (_, index) => index + 1)
 
+  const performBooking = async () => {
+    console.log('performBooking', userId);
+
+    if (userId) {
+        if (dateRange.startDate && dateRange.endDate) {
+            const formData = new FormData();
+            formData.append('guests', guests);
+            formData.append('start_date', format(dateRange.startDate, 'yyyy-MM-dd'));
+            formData.append('end_date', format(dateRange.endDate, 'yyyy-MM-dd'));
+            formData.append('number_of_nights', nights.toString());
+            formData.append('total_price', totalPrice.toString());
+
+            const response = await apiService.post(`/api/properties/${property.id}/book/`, formData);
+
+            if (response.success) {
+                console.log('Bookin successful')
+            } else {
+                console.log('Something went wrong...');
+            }
+        }
+    } else {
+        loginModal.open();
+    }
+}
+
   const _setDateRange = (selection: any) => {
     const newStartDate = new Date(selection.startDate);
     const newEndDate = new Date(selection.endDate);
@@ -105,7 +130,12 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
           </select>
         </div>
 
-        <div className="w-full mb-6 py-6 text-center text-white bg-airbnb hover:bg-airbnb-dark rounded-xl">Book</div>
+        <div 
+        onClick={performBooking}
+        className="w-full mb-6 py-6 text-center text-white bg-airbnb hover:bg-airbnb-dark rounded-xl"
+        >
+            Book
+        </div>
         
         <div className="mb-4 flex justify-between align-center">
           <p>${property.price_per_night} * {nights} nights</p>
