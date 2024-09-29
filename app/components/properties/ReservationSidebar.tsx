@@ -129,6 +129,7 @@ const getReservations = async () => {
 
         <DatePicker
           value={dateRange}
+          bookedDates={bookedDates}
           onChange={(value) => _setDateRange(value.selection)}
         />
 
