@@ -12,7 +12,7 @@ import CustomButton from "../form/CustomButton";
 import SelectCountry, { SelectCountryValue } from "../form/SelectCountry";
 import { useRouter } from 'next/navigation';
 
-import apiService from "@/app/services/apiSevice";
+import apiService from "@/app/services/apiService";
 
 const AddPropertyModal = () => {
     //

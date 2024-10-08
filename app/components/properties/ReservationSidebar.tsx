@@ -6,7 +6,7 @@ import { differenceInDays, eachDayOfInterval, format} from 'date-fns';
 import DatePicker from "../form/Calendar";
 
 
-import apiService from "@/app/services/apiSevice";
+import apiService from "@/app/services/apiService";
 import useLoginModal from "@/app/hooks/useLoginModal";
 
 const initialDateRange = {

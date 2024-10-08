@@ -2,7 +2,7 @@ import ReservationSidebar from "@/app/components/properties/ReservationSidebar"
 import Image from "next/image"
 import Link from "next/link";
 
-import apiService from "@/app/services/apiSevice";
+import apiService from "@/app/services/apiService";
 import { getUserId } from "@/app/lib/action";
 
 

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useSignupModal from "@/app/hooks/useSignupModal";
 import CustomButton from "../form/CustomButton";
-import apiService from "@/app/services/apiSevice";
+import apiService from "@/app/services/apiService";
 import { handleLogin } from "@/app/lib/action";
 
 const SignupModal = () => {

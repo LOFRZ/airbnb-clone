@@ -1,5 +1,5 @@
 import Image from "next/image";
-import apiService from "@/app/services/apiSevice";
+import apiService from "@/app/services/apiService";
 import Link from "next/link";
 
 const MyReservationsPage = async () => {
