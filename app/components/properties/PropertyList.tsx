@@ -48,7 +48,15 @@ const PropertyList: React.FC<PropertyListProps> = ({
 
     const tmpProperties =await apiService.get(url)
 
-    setProperties(tmpProperties.data);
+    setProperties(tmpProperties.data.map((property: PropertyType) => {
+      if (tmpProperties.favorites.includes(property.id)) {
+        property.is_favorite = true
+      } else {
+        property.is_favorite = false
+      }
+
+      return property
+    }));
   };
 
   useEffect(() => {
