@@ -34,7 +34,10 @@ const InboxPage = async () => {
 
         {conversations.map((conversation: ConversationType) => {
           return (
-              <Conversation />
+              <Conversation 
+                userId={userId}
+                conversation={conversation}
+              />
           )
         })}
     </main>
