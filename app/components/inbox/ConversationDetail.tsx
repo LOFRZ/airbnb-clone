@@ -57,7 +57,7 @@ useEffect(() => {
 
 
             <CustomButton
-                label={Send}
+                label={'Send'}
                 onClick={() => console.log('Clicked')}
                 className="w-[100px]"
             />    
