@@ -1,9 +1,9 @@
-import { getUserId } from "@/app/lib/action";
+import { getUserId } from "../../lib/action";
 import React, {useState, useEffect } from 'react';
 import apiService from "@/app/services/apiService";
 import ConversationDetail from "@/app/components/inbox/ConversationDetail";
 import { UserType } from "../page";
-import { getAccessToken } from "@/app/lib/action";
+import { getAccessToken } from "../../lib/action";
 
 export type MessageType = {
     id: string;

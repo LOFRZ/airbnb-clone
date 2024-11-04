@@ -1,6 +1,6 @@
 import { getUserId } from "../lib/action";
 import apiService from "../services/apiService";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from 'react';
 import Conversation from "../components/inbox/Conversation";
 
 export type UserType = {
@@ -17,7 +17,7 @@ export type ConversationType = {
 const InboxPage = async () => {
     const userId = await getUserId();
 
-    if (!userId ) {
+    if (!userId) {
         return (
             <main className="max-w-[1500px] max-auto px-6 py-12">
                 <p>You need to be authenticated...</p>
