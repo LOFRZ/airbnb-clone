@@ -33,15 +33,10 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     )
 
     useEffect(() => {
-        console.log(conversation)
-        console.log("otherUser", otherUser)
-        console.log("myUser", myUser)
         console.log("Connection state changed", readyState.toString());
     }, [readyState]);
 
     useEffect(() => {
-        console.log(lastJsonMessage)
-        console.log('test')
         if (lastJsonMessage && typeof lastJsonMessage === 'object' && 'name' in lastJsonMessage && 'body' in lastJsonMessage) {
             const message: MessageType = {
                 id: '',
