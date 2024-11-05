@@ -16,7 +16,9 @@ export type MessageType = {
 
 const ConversationPage = async ({ params }: { params: {id: string }}) => {
     const userId = await getUserId();
+    console.log(userId)
     const token = await getAccessToken();
+    console.log(token)
 
     if (!userId || !token) {
         return (
@@ -25,9 +27,10 @@ const ConversationPage = async ({ params }: { params: {id: string }}) => {
             </main>
         )
     }
-
+    console.log("params.id", params.id)
     const conversation = await apiService.get(`/api/chat/${params.id}/`)
-
+    console.log("conversation")
+    console.log(conversation)
     return (
         <main className="max-w-[1500px] mx-auto px-6 pb-6">
             <ConversationDetail 
